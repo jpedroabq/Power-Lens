@@ -1,0 +1,34 @@
+/* Azul #135BE7" */
+
+.logomarca {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 25px;
+  margin-bottom: 3rem;
+  z-index: -1;
+}
+
+/* Estilo da barra de prompt */
+.user-input input{
+  position: relative;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #135BE7;
+  top: 5px;
+  width: 1150px;
+  height: 35px;
+  font-size: 14px;
+  margin: 0 auto;
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+/* Estilo quando a barra de input está em foco (usuário escrevendo prompt) */
+.user-input input:focus {
+  border: 1.5px solid #135BE7;
+  border-radius: 10px;
+  outline: none;
+  background-color: #fafafa;
+}
