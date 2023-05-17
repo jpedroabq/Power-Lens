@@ -8,7 +8,7 @@
 }
 
 /* Estilo da barra de prompt */
-.user-input input{
+.user-input input {
   position: relative;
   outline: none;
   border: none;
@@ -22,6 +22,23 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+/* Estilo botão de pesquisa */
+.user-input button {
+  position: relative;
+  border: none;
+  outline: none;
+  height: 33px;
+  width: 48px;
+  left: 77.5%;
+  bottom: 32px;
+  background-color: transparent;
+}
+
+/* Estilo do ícone dentro do botão de pesquisa */
+.search-icon {
+  width: 33px;
+  height: 33px;
+}
 
 /* Estilo quando a barra de input está em foco (usuário escrevendo prompt) */
 .user-input input:focus {
