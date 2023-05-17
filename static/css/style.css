@@ -30,3 +30,14 @@
   outline: none;
   background-color: #fafafa;
 }
+
+/* Estilo container do botão de add widget */
+.container {
+  position: relative;
+  left: 16rem;
+  top: 3rem;
+  width: 530px;
+  height: 300px;
+  border-radius: 10px;
+  background-color: #f0f0f0;
+}
