@@ -14,6 +14,28 @@
   height: 100px;
 }
 
+.logout-button{
+  transition: all .5s ease;
+  display: inline-block;
+  position: relative;
+  align-items: center;
+  height: 2rem;
+  width: 100px;
+  left: 90%;
+  top: 1rem;
+  border-radius: 15px;
+  outline: none;
+  background-color: #135BE7;
+  border: none;
+  color: white;
+  text-transform: uppercase;
+}
+
+.logout-button:hover {
+  background-color: #12409b;
+
+}
+
 /* Estilo da barra de prompt */
 .user-input input {
   position: relative;
@@ -39,6 +61,7 @@
   left: 77.5%;
   bottom: 32px;
   background-color: transparent;
+  cursor: pointer;
 }
 
 /* Estilo do ícone dentro do botão de pesquisa */

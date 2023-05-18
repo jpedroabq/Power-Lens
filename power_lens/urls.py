@@ -21,5 +21,5 @@ from apps.power_lens.views import homePage
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homePage),
-    path('auth/', include('apps.power_lens.urls'))
+    path('auth/', include('apps.power_lens.urls')),
 ]

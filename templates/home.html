@@ -16,10 +16,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <!-- /Fonte Montserrat -->
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
     <link rel="stylesheet" href=" {% static 'css/home.css' %}">
 </head>
 
 <body>
+    <form action="{% url 'logout' %}" method="POST">{% csrf_token %}
+        <button class="logout-button">Sair</button>
+    </form>
     <div class="container-logomarca">
         <img src="{% static 'media/powerlens.svg' %} " alt="logomarca-powerlens" class='logomarca'>
     </div>

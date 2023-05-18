@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout as logout_django
 from django.shortcuts import redirect
 
 
@@ -46,6 +47,9 @@ def login(request):
         login_django(request, user)
         return redirect(homePage)
 
-
+def logout(request):
+    if request.method == "POST":
+        logout_django(request)
+        return redirect(login)
   
     
