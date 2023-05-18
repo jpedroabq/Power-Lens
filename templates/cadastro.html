@@ -22,7 +22,8 @@
     </div>
     <div class="container-cadastro">
         <form action="{% url 'cadastro' %}" method="POST">{% csrf_token %}
-            <input type="text" placeholder="Username" name="username" class="input-username">
+            <h1>Criar conta</h1>
+            <input type="text" placeholder="Nome de usuário" name="username" class="input-username">
             <br>
             <br>
             <input type="email" placeholder="E-mail" name="email" class="input-email">
@@ -37,6 +38,12 @@
             <br>
             <br>
         </form>
+        <form action="{% url 'login' %}" method="GET">
+            <div class="login-button-container">
+                <button class="redirect-button">Já tem uma conta? Entre aqui.</button>
+            </div>
+    </form>
     </div>
+    
 </body>
 </html>
