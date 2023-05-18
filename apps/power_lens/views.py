@@ -26,7 +26,7 @@ def cadastro(request):
         
         user = User.objects.create_user(username=username, email=email, password=senha)
 
-        return HttpResponse('Usuário criado com sucesso!') 
+        return redirect(login)
     
 def login(request):
     if request.method == "GET":
