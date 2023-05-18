@@ -56,6 +56,11 @@
     text-transform: uppercase;
 }
 
+.submit-button:hover {
+    background-color: #12409b;
+
+}
+
 ::placeholder {
     text-align: center;
 }
