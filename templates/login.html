@@ -22,7 +22,7 @@
         <img src="{% static 'media/powerlens.svg' %} " alt="logomarca-powerlens" class='logomarca'>
     </div>
     <div class="container-login">
-        <form action="{% url 'login' %}" method="POST">{% csrf_token %}
+        <form action="{% url 'login' %}" method="POST" autocomplete="off">{% csrf_token %}
             <h1>Entrar</h1>
             <input type="text" placeholder="Nome de usuário" name="username" class="input-username">
             <br>

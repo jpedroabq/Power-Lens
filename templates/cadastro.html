@@ -21,7 +21,7 @@
         <img src="{% static 'media/powerlens.svg' %} " alt="logomarca-powerlens" class='logomarca'>
     </div>
     <div class="container-cadastro">
-        <form action="{% url 'cadastro' %}" method="POST">{% csrf_token %}
+        <form action="{% url 'cadastro' %}" method="POST" autocomplete="off">{% csrf_token %}
             <h1>Criar conta</h1>
             <input type="text" placeholder="Nome de usuário" name="username" class="input-username">
             <br>
