@@ -78,9 +78,16 @@
   background-color: #fafafa;
 }
 
-/* Estilo container do botão de add widget */
+.output-area {
+  position: relative;
+  width: 800px;
+  height: 500px;
+}
+
 .container {
   position: relative;
+  resize: both;
+  overflow: auto;
   left: 16rem;
   top: 3rem;
   width: 530px;
