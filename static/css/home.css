@@ -4,14 +4,14 @@
   width: 500px;
   height: 120px;
   position: relative;
-  top: 25px;
+  top: -60px;
   margin-bottom: 3rem;
   z-index: -1;
 }
 
 .logomarca{
   width: 100%;
-  height: 100px;
+  height: 150px;
 }
 
 .logout-button{
@@ -22,7 +22,7 @@
   height: 2rem;
   width: 100px;
   left: 90%;
-  top: 1rem;
+  top: 30px;
   border-radius: 15px;
   outline: none;
   background-color: #135BE7;
@@ -42,7 +42,7 @@
   outline: none;
   border: none;
   border-bottom: 1px solid #135BE7;
-  top: 5px;
+  top: -80px;
   width: 1150px;
   height: 35px;
   font-size: 14px;
@@ -59,7 +59,7 @@
   height: 33px;
   width: 48px;
   left: 77.5%;
-  bottom: 32px;
+  bottom: 117px;
   background-color: transparent;
   cursor: pointer;
 }
