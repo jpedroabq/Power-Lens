@@ -80,18 +80,19 @@
 
 .output-area {
   position: relative;
-  width: 800px;
-  height: 500px;
+  width: 100%;
+  top: -80px;
+  height: 710px;
 }
 
 .container {
   position: relative;
   resize: both;
-  overflow: auto;
   left: 16rem;
   top: 3rem;
   width: 530px;
   height: 300px;
   border-radius: 10px;
   background-color: #f0f0f0;
+  overflow: hidden;
 }
