@@ -36,13 +36,27 @@
         <img src="{% static 'media/powerlens.svg' %} " alt="logomarca-powerlens" class='logomarca'>
     </div>
     <div class="user-input">
-        <input type="text" placeholder="Digite sua pesquisa...">
-        <button class="search-button">
+        <input type="text" id="searchBar" placeholder="Digite sua pesquisa...">
+        <button class="search-button" id="searchBtn">
             <img src="{% static 'media/search-icon.png' %}" alt="botão de pesquisa" class="search-icon">
         </button>
     </div>
     <div class="output-area">
         <div id ="container" class="container"></div>
+
+    <script>
+        // Search function
+        function search(query) {
+            $.get('http://127.0.0.1:5000/api/sql', { prompt: query }, function(data) {
+                console.log(data);
+            });
+        }
+
+        $('#searchBtn').on('click', function() {
+            var query = $('#searchBar').val();
+            search(query);
+        });
+    </script>
 </body>
 
 </html>
