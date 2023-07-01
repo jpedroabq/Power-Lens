@@ -86,6 +86,7 @@
 }
 
 .container {
+  visibility: hidden;
   position: relative;
   resize: both;
   left: 16rem;

@@ -24,11 +24,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    <script src="{% static 'js/grafico.js' %}"></script>
+    
 
 </head>
 
-<body onload="dragElement('container')">
+<body>
     <form action="{% url 'logout' %}" method="POST">{% csrf_token %}
         <button class="logout-button">Sair</button>
     </form>
@@ -36,13 +36,15 @@
         <img src="{% static 'media/powerlens.svg' %} " alt="logomarca-powerlens" class='logomarca'>
     </div>
     <div class="user-input">
-        <input type="text" placeholder="Digite sua pesquisa...">
-        <button class="search-button">
-            <img src="{% static 'media/search-icon.png' %}" alt="botão de pesquisa" class="search-icon">
-        </button>
+        <form action="" id="inputForm">
+            <input type="text" id ="input" placeholder="Digite sua pesquisa...">
+            <button type ="submit" class="search-button">
+                <img src="{% static 'media/search-icon.png' %}" alt="botão de pesquisa" class="search-icon"> </button>
+        </form>                
     </div>
     <div class="output-area">
         <div id ="container" class="container"></div>
-</body>
 
+    <script src="{% static 'js/grafico.js' %}"></script>        
+</body>
 </html>
