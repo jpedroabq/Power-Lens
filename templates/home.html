@@ -23,8 +23,7 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
 </head>
 
@@ -42,13 +41,39 @@
         </button>
     </div>
     <div class="output-area">
-        <div id ="container" class="container"></div>
+        <div id ="container1" class="container"></div>
+        <div id ="container2" class="container"></div>
+        <div id ="container3" class="container"></div>
+        <div id ="container4" class="container"></div>
+        <div id ="container5" class="container"></div>
+        <div id ="container6" class="container"></div>
+    </div>
 
     <script>
         // Search function
         function search(query) {
             $.get('http://127.0.0.1:5000/api/sql', { prompt: query }, function(data) {
                 console.log(data);
+
+                var trace1 = {
+                    type: 'bar',  // set the chart type
+                    x: data.map(function(item) {return item.FirstName; }),  // x-axis values
+                    y: data.map(function(item) {return item.QuantitySold; }),  // y-axis values
+                };
+
+                var layout = {
+                    title: 'Quantidade de vendas por cliente',  // chart title
+                    xaxis: {
+                    title: 'X axis',  // x-axis label
+                    },
+                    yaxis: {
+                    title: 'Y axis',  // y-axis label
+                    }
+                };
+
+                var data = [trace1];
+
+                Plotly.newPlot('container1', data, layout);
             });
         }
 
@@ -56,6 +81,7 @@
             var query = $('#searchBar').val();
             search(query);
         });
+
     </script>
     <script src="{% static 'js/grafico.js' %}"></script>        
 </body>
