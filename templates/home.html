@@ -73,7 +73,21 @@
 
                 var data = [trace1];
 
+                var config = {
+                    responsive: true,
+                    editable: true, // Allow the graph to be dragged and resized
+                };
+
                 Plotly.newPlot('container1', data, layout);
+
+                $('#container1').resizable({
+                    resize: function(event, ui) {
+                        Plotly.relayout('container1', {
+                            width: ui.size.width,
+                            height: ui.size.height
+                        });
+                    }
+                });
             });
         }
 
