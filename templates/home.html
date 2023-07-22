@@ -1,0 +1,88 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Lens</title>
+    <link rel='icon' type='image/x-icon' href=" {% static 'media/favicon.png' %}"></link>
+    
+    <!-- Fonte Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <!-- /Fonte Montserrat -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" href=" {% static 'css/home.css' %}">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+</head>
+
+<body>
+    <form action="{% url 'logout' %}" method="POST">{% csrf_token %}
+        <button class="logout-button">Sair</button>
+    </form>
+    <div class="container-logomarca">
+        <img src="{% static 'media/powerlens.svg' %} " alt="logomarca-powerlens" class='logomarca'>
+    </div>
+    <div class="user-input">
+        <input type="text" id="searchBar" placeholder="Digite sua pesquisa...">
+        <button class="search-button" id="searchBtn">
+            <img src="{% static 'media/search-icon.png' %}" alt="botão de pesquisa" class="search-icon">
+        </button>
+    </div>
+    <div class="output-area">
+        <div id ="container1" class="container"></div>
+        <div id ="container2" class="container"></div>
+        <div id ="container3" class="container"></div>
+        <div id ="container4" class="container"></div>
+        <div id ="container5" class="container"></div>
+        <div id ="container6" class="container"></div>
+    </div>
+
+    <script>
+        // Search function
+        function search(query) {
+            $.get('http://127.0.0.1:5000/api/sql', { prompt: query }, function(data) {
+                console.log(data);
+
+                var trace1 = {
+                    type: 'bar',  // set the chart type
+                    x: data.map(function(item) {return item.FirstName; }),  // x-axis values
+                    y: data.map(function(item) {return item.QuantitySold; }),  // y-axis values
+                };
+
+                var layout = {
+                    title: 'Quantidade de vendas por cliente',  // chart title
+                    xaxis: {
+                    title: 'X axis',  // x-axis label
+                    },
+                    yaxis: {
+                    title: 'Y axis',  // y-axis label
+                    }
+                };
+
+                var data = [trace1];
+
+                Plotly.newPlot('container1', data, layout);
+            });
+        }
+
+        $('#searchBtn').on('click', function() {
+            var query = $('#searchBar').val();
+            search(query);
+        });
+
+    </script>
+    <script src="{% static 'js/grafico.js' %}"></script>        
+</body>
+</html>

@@ -1,0 +1,105 @@
+.container-logomarca {
+    display: block;
+    margin: auto;
+    width: 500px;
+    height: 120px;
+    position: relative;
+    top: 25px;
+    margin-bottom: 3rem;
+    z-index: -1;
+}
+
+.logomarca {
+    width: 100%;
+    height: 100px;
+}
+
+.container-login {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: auto;
+    top: 4rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-login h1 {
+    position: relative;
+    left: -33%;
+    top: -10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+.container-login input{
+    border: 1px solid #135BE7;
+    outline: none;
+    height: 2rem;
+    width: 250px;
+    text-align: center;
+    border-radius: 4px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container-button{
+    text-align: center;
+}
+
+.submit-button{
+    transition: all .5s ease;
+    display: inline-block;
+    align-items: center;
+    height: 2rem;
+    width: 150px;
+    border-radius: 15px;
+    outline: none;
+    background-color: #135BE7;
+    border: none;
+    color: white;
+    text-transform: uppercase;
+}
+
+.submit-button:hover{
+    background-color: #12409b;
+   
+}
+
+::placeholder {
+    text-align: center;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+}
+
+:-moz-placeholder {
+    text-align: center;
+}
+
+.register-button-container{
+    display: flex;
+    justify-content: center;
+    top: 20%;
+}
+
+.redirect-button{
+    transition: all .5s ease;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #135BE7;
+}
+
+.redirect-button:hover{
+    transform: scale(1.075);
+}

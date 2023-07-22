@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Lens</title>
+    <link rel='icon' type='image/x-icon' href=" {% static 'media/favicon.png' %}"></link>
+
+    <!-- Fonte Montserrat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <!-- /Fonte Montserrat -->
+    <link rel="stylesheet" href=" {% static 'css/cadastro.css' %}">
+</head>
+<body>
+    <div class="container-logomarca">
+        <img src="{% static 'media/powerlens.svg' %} " alt="logomarca-powerlens" class='logomarca'>
+    </div>
+    <div class="container-cadastro">
+        <form action="{% url 'cadastro' %}" method="POST" autocomplete="off">{% csrf_token %}
+            <h1>Criar conta</h1>
+            <input type="text" placeholder="Nome de usuário" name="username" class="input-username">
+            <br>
+            <br>
+            <input type="email" placeholder="E-mail" name="email" class="input-email">
+            <br>
+            <br>
+            <input type="password" placeholder="Senha" name="senha" class="input-senha">
+            <br>
+            <br>
+            <div class="container-button">
+                <button class="submit-button">Cadastrar</button>
+            </div>
+            <br>
+            <br>
+        </form>
+        <form action="{% url 'login' %}" method="GET">
+            <div class="login-button-container">
+                <button class="redirect-button">Já tem uma conta? Entre aqui.</button>
+            </div>
+    </form>
+    </div>
+    
+</body>
+</html>
