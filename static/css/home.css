@@ -88,12 +88,13 @@
 .container {
   visibility: hidden;
   position: relative;
-  resize: both;
   left: 16rem;
   top: 3rem;
   width: 530px;
   height: 300px;
+  border: 2px solid;
   border-radius: 10px;
+  border-color: #2c69de;
   background-color: #f0f0f0;
   overflow: hidden;
 }

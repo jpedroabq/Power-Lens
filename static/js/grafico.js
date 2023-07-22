@@ -2,7 +2,8 @@
 
 $(function () {
   $(".container").draggable({
-    containment: "parent"
+    containment: "parent",
+    handles: "n, e, s, w, ne, sw, nw"
   });
 });
 
