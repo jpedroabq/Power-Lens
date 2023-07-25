@@ -83,16 +83,21 @@
   width: 100%;
   top: -80px;
   height: 710px;
+
+  display: grid;
+  grid-template-rows: repeat(2, auto);
+  grid-template-columns: repeat(3, auto);
+  gap: 3px;
 }
 
 .container {
   visibility: hidden;
   position: relative;
-  left: 16rem;
+  left: 4rem;
   top: 3rem;
   width: 530px;
   height: 300px;
-  border: 2px solid;
+  border: 1.5px solid;
   border-radius: 10px;
   border-color: #2c69de;
   overflow: hidden;
@@ -107,7 +112,6 @@
   border: none;
   cursor: pointer;
   border-radius: 6px;
-  margin-left: 30px;
   top: 50%;
   transform: translateY(375%);
 
