@@ -1,12 +1,10 @@
 //Torna a div do gráfico arrastável e redimensionável
-
 $(function () {
   $(".container").draggable({
     containment: "parent",
     handles: "n, e, s, w, ne, sw, nw"
   });
 });
-
 $(function () {
   $(".container").resizable({
     containment: "#parent",
@@ -16,9 +14,9 @@ $(function () {
 });
 
 
+//Adiciona as divs invisíveis
 let inputForm = document.getElementById('searchBtn');
 let i = 1;
-
 inputForm.addEventListener("click", (e) => {
   e.preventDefault();
 
@@ -35,4 +33,83 @@ inputForm.addEventListener("click", (e) => {
     input.value = "";
     i++;
   }
+});
+
+//Criação do seletor de gráficos
+c = 1
+function criarBotoes() {
+  const divContainer = document.getElementById('container' + c);
+
+  const botaoBarras = document.createElement('button');
+  botaoBarras.textContent = 'Barras';
+  botaoBarras.id = ('barras' + c);
+
+  const botaoLinhas = document.createElement('button');
+  botaoLinhas.textContent = 'Linhas';
+  botaoLinhas.id = ('linhas' + c);
+
+  const botaoTorta = document.createElement('button');
+  botaoTorta.textContent = 'Torta';
+  botaoTorta.id = ('torta' + c);
+
+  const botaoTabela = document.createElement('button');
+  botaoTabela.textContent = 'Tabela';
+  botaoTabela.id = ('tabela' + c);
+
+  divContainer.appendChild(botaoBarras);
+  divContainer.appendChild(botaoLinhas);
+  divContainer.appendChild(botaoTorta);
+  divContainer.appendChild(botaoTabela);
+
+  c++;
+}
+
+
+// Search function
+function search(query) {
+  $.get('http://127.0.0.1:5000/api/sql', { prompt: query }, function (data) {
+    console.log(data);
+
+    var trace1 = {
+      type: 'bar',  // set the chart type
+      x: data.map(function (item) { return item.FirstName; }),  // x-axis values
+      y: data.map(function (item) { return item.QuantitySold; }),  // y-axis values
+    };
+
+    var layout = {
+      title: 'Quantidade de vendas por cliente',  // chart title
+      xaxis: {
+        title: 'X axis',  // x-axis label
+      },
+      yaxis: {
+        title: 'Y axis',  // y-axis label
+      }
+    };
+
+    var data = [trace1];
+
+    var config = {
+      responsive: true,
+      editable: true, // Allow the graph to be dragged and resized
+    };
+
+    Plotly.newPlot('container1', data, layout);
+
+    $('#container1').resizable({
+      resize: function (event, ui) {
+        Plotly.relayout('container1', {
+          width: ui.size.width,
+          height: ui.size.height
+        });
+      }
+    });
+  });
+}
+
+
+//Evento de clique no botão de busca
+$('#searchBtn').on('click', function () {
+  var query = $('#searchBar').val();
+  criarBotoes();
+  //search(query); // Chama a função de busca (api)
 });
