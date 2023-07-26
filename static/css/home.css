@@ -43,7 +43,7 @@
   border: none;
   border-bottom: 1px solid #135BE7;
   top: -80px;
-  width: 1150px;
+  width: 59.9vw;
   height: 35px;
   font-size: 14px;
   margin: 0 auto;
@@ -56,9 +56,9 @@
   position: relative;
   border: none;
   outline: none;
-  height: 33px;
-  width: 48px;
-  left: 77.5%;
+  height: 3.2vh;
+  width: 2.5vw;
+  left: 78%;
   bottom: 117px;
   background-color: transparent;
   cursor: pointer;
@@ -93,10 +93,10 @@
 .container {
   visibility: hidden;
   position: relative;
-  left: 4rem;
-  top: 3rem;
-  width: 530px;
-  height: 300px;
+  left: 3.3vw;
+  top: 2.5vh;
+  width: 27.7vw;
+  height: 34vh;
   border: 1.5px solid;
   border-radius: 10px;
   border-color: #2c69de;
