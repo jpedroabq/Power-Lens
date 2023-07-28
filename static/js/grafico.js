@@ -37,7 +37,7 @@ inputForm.addEventListener("click", (e) => {
 
 //Criação do seletor de gráficos
 c = 1
-function criarBotoes() {
+function criarBotoes(query) {
   const divContainer = document.getElementById('container' + c);
 
   const botaoBarras = document.createElement('button');
@@ -61,17 +61,33 @@ function criarBotoes() {
   divContainer.appendChild(botaoTorta);
   divContainer.appendChild(botaoTabela);
 
+  botaoBarras.addEventListener('click', function () {
+    search(query, 'bar');
+  });
+
+  botaoLinhas.addEventListener('click', function () {
+    search(query, 'line');
+  });
+
+  botaoTabela.addEventListener('click', function () {
+    search(query, 'bar');
+  });
+
+  botaoTorta.addEventListener('click', function () {
+    search(query, 'bar');
+  });
+
   c++;
 }
 
 
 // Search function
-function search(query) {
+function search(query, g_type) {
   $.get('http://127.0.0.1:5000/api/sql', { prompt: query }, function (data) {
-    console.log(data);
 
+    // trace
     var trace1 = {
-      type: 'bar',  // set the chart type
+      type: g_type,  // set the chart type
       x: data.map(function (item) { return item.FirstName; }),  // x-axis values
       y: data.map(function (item) { return item.QuantitySold; }),  // y-axis values
     };
@@ -93,7 +109,7 @@ function search(query) {
       editable: true, // Allow the graph to be dragged and resized
     };
 
-    Plotly.newPlot('container1', data, layout);
+    Plotly.newPlot('container1', data, layout, config);
 
     $('#container1').resizable({
       resize: function (event, ui) {
@@ -110,6 +126,6 @@ function search(query) {
 //Evento de clique no botão de busca
 $('#searchBtn').on('click', function () {
   var query = $('#searchBar').val();
-  criarBotoes();
+  criarBotoes(query);
   //search(query); // Chama a função de busca (api)
 });
