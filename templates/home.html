@@ -40,6 +40,16 @@
             <img src="{% static 'media/search-icon.png' %}" alt="botão de pesquisa" class="search-icon">
         </button>
     </div>
+    <div class="btn-container">
+        <button id="lock">
+            <img src="{% static 'media/lock.svg'%}" class="lock" alt="Travar">
+        </button>
+        <button id="unlock">
+            <img src="{% static 'media/unlock.svg'%}" class="unlock" alt="Destravar">
+        </button>
+        <span class="lock"></span>
+
+    </div>
     <div class="output-area">
         <div id ="container1" class="container"></div>
         <div id ="container2" class="container"></div>
@@ -48,6 +58,6 @@
         <div id ="container5" class="container"></div>
         <div id ="container6" class="container"></div>
     </div>
-    <script src="{% static 'js/grafico.js' %}"></script>        
+    <script src="{% static 'js/grafico.js' %}"></script>   
 </body>
 </html>

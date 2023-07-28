@@ -138,3 +138,55 @@
     transition: 0.5s, color 0s .5s, background-color 0s .5s;
 
 }
+
+.btn-container {
+  position: absolute;
+  display: flex;
+  gap: 3px;
+  width: 33px;
+  height: 33px;
+  top: 18%;
+  right: 95%;
+}
+
+.lock {
+  filter: invert(23%) sepia(57%) saturate(5194%) hue-rotate(219deg) brightness(94%) contrast(93%);
+  width: 33px;
+  height: 33px;
+
+}
+
+#lock {
+  visibility: hidden;
+  border: none;
+  background-color: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+#lock:hover {
+  transition: 0.5s;
+  scale: 1.2;
+}
+
+
+.unlock {
+  filter: invert(23%) sepia(57%) saturate(5194%) hue-rotate(219deg) brightness(94%) contrast(93%);
+  width: 33px;
+  height: 33px;
+
+}
+
+#unlock {
+  border: none;
+  background-color: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+#unlock:hover {
+  transition: 0.5s;
+  scale: 1.2;
+}
