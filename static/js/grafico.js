@@ -1,10 +1,5 @@
 //Torna a div do gráfico arrastável e redimensionável
-$(function () {
-  $(".container").draggable({
-    containment: "parent",
-    handles: "n, e, s, w, ne, sw, nw"
-  });
-});
+
 $(function () {
   $(".container").resizable({
     containment: "#parent",
@@ -13,6 +8,35 @@ $(function () {
   );
 });
 
+//Trava e destrava divs
+let isMovable = false;
+
+function lockDiv() {
+  if (!isMovable) {
+    // Habilitar a movimentação da div usando a biblioteca Draggable (ou qualquer outra de sua preferência)
+    $(".container").draggable({
+      containment: "parent",
+      handles: "n, e, s, w, ne, sw, nw"
+    });
+    
+    isMovable = true;
+    document.getElementById('lock').style.visibility = "visible";
+    document.getElementById('unlock').style.visibility = "hidden";
+
+
+  } else {
+    // Desabilitar a movimentação da div
+    $(".container").draggable("destroy");
+    isMovable = false;
+    document.getElementById('lock').style.visibility = "hidden";
+    document.getElementById('unlock').style.visibility = "visible";
+  }
+}
+
+const lockBtn = document.getElementById('lock');
+const unlockBtn = document.getElementById('unlock');
+unlockBtn.addEventListener('click', lockDiv)
+lockBtn.addEventListener('click', lockDiv)
 
 //Adiciona as divs invisíveis
 let inputForm = document.getElementById('searchBtn');
@@ -61,20 +85,35 @@ function criarBotoes(query) {
   divContainer.appendChild(botaoTorta);
   divContainer.appendChild(botaoTabela);
 
+  function removeBtns() {
+    botaoBarras.remove();
+    botaoLinhas.remove();
+    botaoTabela.remove();
+    botaoTorta.remove();
+  }
+
+ 
+
   botaoBarras.addEventListener('click', function () {
     search(query, 'bar');
+    removeBtns();
+
   });
 
   botaoLinhas.addEventListener('click', function () {
     search(query, 'line');
+    removeBtns();
   });
 
   botaoTabela.addEventListener('click', function () {
     search(query, 'bar');
+    removeBtns();
   });
 
   botaoTorta.addEventListener('click', function () {
     search(query, 'bar');
+    removeBtns();
+    moveLock();
   });
 
   c++;
