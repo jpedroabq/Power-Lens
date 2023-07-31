@@ -148,9 +148,9 @@ function search(query, g_type) {
       editable: true, // Allow the graph to be dragged and resized
     };
 
-    Plotly.newPlot('container1', data, layout, config);
+    Plotly.newPlot('container1'+c, data, layout, config);
 
-    $('#container1').resizable({
+    $('#container'+c).resizable({
       resize: function (event, ui) {
         Plotly.relayout('container1', {
           width: ui.size.width,
