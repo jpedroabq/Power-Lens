@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homePage),
     path('auth/', include('apps.power_lens.urls')),
+    path('power_lens/', include('apps.power_lens.urls')),
 ]

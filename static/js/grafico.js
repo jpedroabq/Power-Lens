@@ -1,4 +1,4 @@
-//Torna a div do gr√°fico arrast√°vel e redimension√°vel
+//Torna a div do gr·fico arrast·vel e redimension·vel
 
 $(function () {
   $(".container").resizable({
@@ -13,7 +13,7 @@ let isMovable = false;
 
 function lockDiv() {
   if (!isMovable) {
-    // Habilitar a movimenta√ß√£o da div usando a biblioteca Draggable (ou qualquer outra de sua prefer√™ncia)
+    // Habilitar a movimentaÁ„o da div usando a biblioteca Draggable (ou qualquer outra de sua preferÍncia)
     $(".container").draggable({
       containment: "parent",
       handles: "n, e, s, w, ne, sw, nw"
@@ -25,7 +25,7 @@ function lockDiv() {
 
 
   } else {
-    // Desabilitar a movimenta√ß√£o da div
+    // Desabilitar a movimentaÁ„o da div
     $(".container").draggable("destroy");
     isMovable = false;
     document.getElementById('lock').style.visibility = "hidden";
@@ -38,7 +38,7 @@ const unlockBtn = document.getElementById('unlock');
 unlockBtn.addEventListener('click', lockDiv)
 lockBtn.addEventListener('click', lockDiv)
 
-//Adiciona as divs invis√≠veis
+//Adiciona as divs invisÌveis
 let inputForm = document.getElementById('searchBtn');
 let i = 1;
 inputForm.addEventListener("click", (e) => {
@@ -49,7 +49,7 @@ inputForm.addEventListener("click", (e) => {
   if (input.value ==""){
     alert("Digite algo no campo de busca");
   } else {
-    //torna a div # vis√≠vel
+    //torna a div # visÌvel
     let divName = "container" + i;
     document.getElementById(divName).style.visibility = "visible";
 
@@ -59,26 +59,52 @@ inputForm.addEventListener("click", (e) => {
   }
 });
 
-//Cria√ß√£o do seletor de gr√°ficos
+//CriaÁ„o do seletor de gr·ficos
 c = 1
-function criarBotoes(query) {
-  const divContainer = document.getElementById('container' + c);
+
+$(document).ready(function () {
+  // Send a request to the Django backend to retrieve the graph data from the session
+  $.get('power_lens/retrieve_graph/', function (data) {
+    // Parse the received JSON data back to JavaScript objects
+    const graphsList = data.graphs_list;
+
+    // Loop through the list of graphs and render each one
+    graphsList.forEach(function(graphData) {
+      // Parse the received JSON data back to JavaScript objects
+      const GraphData = JSON.parse(graphData.graph_data);
+      const query = graphData.query;
+      const g_type = graphData.g_type;
+      const c_value = graphData.c_value;
+
+      let divContainer = 'container' + c_value;
+      console.log(divContainer);
+      document.getElementById(divContainer).style.visibility = "visible";
+
+      // Now create the Plotly graph using the retrieved data
+      // You can use the search() function here with the retrieved query and g_type
+      search(query, g_type, save = false, cvalue=c_value);
+    });
+  });
+});
+
+function criarBotoes(query, c_value) {
+  const divContainer = document.getElementById('container' + c_value);
 
   const botaoBarras = document.createElement('button');
   botaoBarras.textContent = 'Barras';
-  botaoBarras.id = ('barras' + c);
+  botaoBarras.id = ('barras' + c_value);
 
   const botaoLinhas = document.createElement('button');
   botaoLinhas.textContent = 'Linhas';
-  botaoLinhas.id = ('linhas' + c);
+  botaoLinhas.id = ('linhas' + c_value);
 
   const botaoTorta = document.createElement('button');
   botaoTorta.textContent = 'Torta';
-  botaoTorta.id = ('torta' + c);
+  botaoTorta.id = ('torta' + c_value);
 
   const botaoTabela = document.createElement('button');
   botaoTabela.textContent = 'Tabela';
-  botaoTabela.id = ('tabela' + c);
+  botaoTabela.id = ('tabela' + c_value);
 
   divContainer.appendChild(botaoBarras);
   divContainer.appendChild(botaoLinhas);
@@ -95,35 +121,52 @@ function criarBotoes(query) {
  
 
   botaoBarras.addEventListener('click', function () {
-    search(query, 'bar');
+    search(query, 'bar', save=true, cvalue=c_value);
     removeBtns();
 
   });
 
   botaoLinhas.addEventListener('click', function () {
-    search(query, 'line');
+    search(query, 'line', save=true, cvalue=c_value);
     removeBtns();
   });
 
   botaoTabela.addEventListener('click', function () {
-    search(query, 'bar');
+    search(query, 'bar', save=true, cvalue=c_value);
     removeBtns();
   });
 
   botaoTorta.addEventListener('click', function () {
-    search(query, 'bar');
+    search(query, 'bar', save=true, cvalue=c_value);
     removeBtns();
     moveLock();
   });
 
-  c++;
+  //c++;
+}
+
+// Function to retrieve the CSRF token from cookies
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      // Does this cookie string begin with the name we want?
+      if (cookie.substring(0, name.length + 1) === name + '=') {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
 }
 
 
 // Search function
-function search(query, g_type) {
+function search(query, g_type, save = true, cvalue = c) {
   $.get('http://127.0.0.1:5000/api/sql', { prompt: query }, function (data) {
-
+    console.log('Creating graph in container'+cvalue)
     // trace
     var trace1 = {
       type: g_type,  // set the chart type
@@ -148,23 +191,67 @@ function search(query, g_type) {
       editable: true, // Allow the graph to be dragged and resized
     };
 
-    Plotly.newPlot('container'+c, data, layout, config);
+    // control variable for div
+    Plotly.newPlot('container'+cvalue, data, layout, config);
 
-    $('#container'+c).resizable({
+    $('#container'+cvalue).resizable({
       resize: function (event, ui) {
-        Plotly.relayout('container1', {
+        Plotly.relayout('container'+cvalue, {
           width: ui.size.width,
           height: ui.size.height
         });
       }
     });
+    c++;
+
+    if (save == true) {
+      const graphJson = JSON.stringify(data);
+      const csrftoken = getCookie('csrftoken'); // Function to get the CSRF token (see below)
+      
+      $.ajax({
+        type: 'POST',
+        url: 'power_lens/save_graph/', // URL to the Django view that handles saving the graph
+        data: {
+          'graph_data': graphJson,
+          'query': query,
+          'g_type': g_type,
+          // Add any other data you need to save related to the graph
+          'c_value': cvalue,
+          'csrfmiddlewaretoken': csrftoken, // Include the CSRF token in the request
+        },
+        success: function (response) {
+          console.log('Graph saved to session.');
+        },
+        error: function (error) {
+          console.error('Error saving graph to session:', error);
+        }
+      });
+    }
   });
 }
 
-
-//Evento de clique no bot√£o de busca
+//Evento de clique no bot„o de busca
 $('#searchBtn').on('click', function () {
   var query = $('#searchBar').val();
-  criarBotoes(query);
-  //search(query); // Chama a fun√ß√£o de busca (api)
+  criarBotoes(query, c_value=c);
+  //search(query); // Chama a funÁ„o de busca (api)
+});
+
+$('#clearGraphsBtn').on('click', function () {
+  const csrftoken = getCookie('csrftoken'); // Function to get the CSRF token (see below)
+
+  $.ajax({
+    type: 'POST',
+    url: 'power_lens/clear_graphs/', // URL to the Django view that handles clearing graphs
+    data: {
+      'csrfmiddlewaretoken': csrftoken, // Include the CSRF token in the request
+    },
+    success: function (response) {
+      console.log('Graphs cleared successfully.');
+      // You may want to refresh the page or update the UI after clearing the graphs
+    },
+    error: function (error) {
+      console.error('Error clearing graphs:', error);
+    }
+  });
 });

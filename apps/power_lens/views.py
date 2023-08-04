@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
@@ -52,4 +52,66 @@ def logout(request):
         logout_django(request)
         return redirect(login)
   
+def save_graph_to_session(request):
+    if request.method == 'POST':
+        graph_data = request.POST.get('graph_data')
+        query = request.POST.get('query')
+        g_type = request.POST.get('g_type')
+        c_value = request.POST.get('c_value')
+        
+        # Retrieve the existing graphs list from the session or create a new empty list
+        graphs_list = request.session.get('graphs_list', [])
+        
+        graphs_list.append({
+            # Now store the graph data in the user's session
+            'graph_data': graph_data,
+            'query': query,
+            'g_type': g_type,
+            'c_value': c_value
+        })
+        
+        # Update the graphs list in the session
+        request.session['graphs_list'] = graphs_list
+        request.session.modified = True
+
+        # print saved session as json
+        print(request.session.items())
+        return JsonResponse({'message': 'Graph data saved successfully.'})
+
+    return JsonResponse({'error': 'Invalid request method.'})
+
+def retrieve_graph_from_session(request):
+    # graph_data = request.session.get('graph_data')
+    # query = request.session.get('query')
+    # g_type = request.session.get('g_type')
+    # c_value = request.session.get('c_value')
+
+    # if graph_data and g_type:
+    #     return JsonResponse({
+    #         'graph_data': graph_data,
+    #         'query': query,
+    #         'c_value': c_value,
+    #         'g_type': g_type
+    #     })
+    # else:
+    #     return JsonResponse({'error': 'No graph data found in the session.'})
+    graphs_list = request.session.get('graphs_list', [])
+    return JsonResponse({'graphs_list': graphs_list})
     
+def clear_graphs(request):
+    # Remove the graph-related data from the user's session
+    if 'graph_data' in request.session:
+        del request.session['graph_data']
+
+    if 'query' in request.session:
+        del request.session['query']
+
+    if 'g_type' in request.session:
+        del request.session['g_type']
+        
+    if 'c_value' in request.session:
+        del request.session['c_value']
+
+    # You can add more session data to remove if needed
+
+    return HttpResponse("Graphs cleared successfully.")
