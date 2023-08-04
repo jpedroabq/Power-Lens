@@ -100,17 +100,8 @@ def retrieve_graph_from_session(request):
     
 def clear_graphs(request):
     # Remove the graph-related data from the user's session
-    if 'graph_data' in request.session:
-        del request.session['graph_data']
-
-    if 'query' in request.session:
-        del request.session['query']
-
-    if 'g_type' in request.session:
-        del request.session['g_type']
-        
-    if 'c_value' in request.session:
-        del request.session['c_value']
+    if 'graphs_list' in request.session:
+        del request.session['graphs_list']
 
     # You can add more session data to remove if needed
 
