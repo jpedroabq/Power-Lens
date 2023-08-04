@@ -1,8 +1,8 @@
 .container-logomarca {
   display: block;
   margin: auto;
-  width: 500px;
-  height: 120px;
+  width: 18.3vw;
+  height: 15vh;
   position: relative;
   top: -60px;
   margin-bottom: 3rem;
@@ -11,11 +11,10 @@
 
 .logomarca{
   width: 100%;
-  height: 150px;
+  height: 200px;
 }
 
 .logout-button{
-  transition: all .5s ease;
   display: inline-block;
   position: relative;
   align-items: center;
@@ -23,16 +22,20 @@
   width: 100px;
   left: 90%;
   top: 30px;
-  border-radius: 15px;
+  border-radius: 6px;
   outline: none;
-  background-color: #135BE7;
-  border: none;
-  color: white;
+  background-color: transparent;
+  border: 1.5px solid #135BE7;
+  color: #135BE7;
   text-transform: uppercase;
 }
 
 .logout-button:hover {
-  background-color: #12409b;
+  transition: 0.5s ease;
+  scale: 1.1;
+  background-color: #135BE7;
+  color: white;
+  backface-visibility: hidden;
 
 }
 
@@ -68,6 +71,12 @@
 .search-icon {
   width: 33px;
   height: 33px;
+  transition: .5s;
+}
+
+.search-icon:hover {
+  transition: 0.5s;
+  scale: 1.2;
 }
 
 /* Estilo quando a barra de input está em foco (usuário escrevendo prompt) */
@@ -153,7 +162,6 @@
   filter: invert(23%) sepia(57%) saturate(5194%) hue-rotate(219deg) brightness(94%) contrast(93%);
   width: 33px;
   height: 33px;
-
 }
 
 #lock {
@@ -189,4 +197,29 @@
 #unlock:hover {
   transition: 0.5s;
   scale: 1.2;
+}
+
+#clearGraphsBtn {
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  width: 160px;
+  height: 40px;
+  border: 1.5px solid #135BE7;
+  color: #135BE7;
+  background-color: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  backface-visibility: hidden;
+}
+
+#clearGraphsBtn:hover {
+  transition: 0.5s;
+  scale: 1.1;
+  backface-visibility: hidden;
+  background-color: #135BE7;
+  color: white;
+}
+
+.logomarca {
+  font-family: 'Montserrat', sans-serif;
 }

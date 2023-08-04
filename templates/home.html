@@ -33,13 +33,15 @@
         <button class="logout-button">Sair</button>
     </form>
     <div class="container-logomarca">
-        <img src="{% static 'media/powerlens.svg' %} " alt="logomarca-powerlens" class='logomarca'>
+        <img src="{% static 'media/LensAI.svg' %} " alt="logomarca-powerlens" class='logomarca'>
     </div>
     <div class="user-input">
-        <input type="text" id="searchBar" placeholder="Digite sua pesquisa...">
-        <button class="search-button" id="searchBtn">
-            <img src="{% static 'media/search-icon.png' %}" alt="botão de pesquisa" class="search-icon">
-        </button>
+        <form>
+            <input type="text" id="searchBar" placeholder="Digite sua pesquisa...">
+            <button  value="Submit" class="search-button" id="searchBtn">
+                <img src="{% static 'media/search-icon.png' %}" alt="botão de pesquisa" class="search-icon">
+            </button>
+        </form>
     </div>
     <div class="btn-container">
         <button id="lock">
@@ -49,7 +51,7 @@
             <img src="{% static 'media/lock.svg'%}" class="unlock" alt="Destravar">
         </button>
         <span class="lock"></span>
-        <button id="clearGraphsBtn">Clear Graphs</button>
+        <button id="clearGraphsBtn">Limpar Gráficos</button>
 
     </div>
     <div class="output-area">
