@@ -1,5 +1,7 @@
 //Torna a div do gráfico arrastável e redimensionável
 
+let query = "";
+
 $(function () {
   $(".container").resizable({
     containment: "#parent",
@@ -54,6 +56,7 @@ inputForm.addEventListener("click", (e) => {
     document.getElementById(divName).style.visibility = "visible";
 
     console.log(input.value);
+    query = input.value;
     input.value = "";
     i++;
   }
@@ -166,12 +169,12 @@ function getCookie(name) {
 // Search function
 function search(query, g_type, save = true, cvalue = c) {
   $.get('http://127.0.0.1:5000/api/sql', { prompt: query }, function (data) {
-    console.log('Creating graph in container'+cvalue)
+    var keys = Object.keys(data[0])
     // trace
     var trace1 = {
       type: g_type,  // set the chart type
-      x: data.map(function (item) { return item.FirstName; }),  // x-axis values
-      y: data.map(function (item) { return item.QuantitySold; }),  // y-axis values
+      x: data.map(function (item) { return item[keys[0]]; }),  // x-axis values
+      y: data.map(function (item) { return item[keys[keys.length - 1]]; }),  // y-axis values
     };
 
     var layout = {
@@ -232,7 +235,8 @@ function search(query, g_type, save = true, cvalue = c) {
 
 //Evento de clique no botão de busca
 $('#searchBtn').on('click', function () {
-  var query = $('#searchBar').val();
+  //query = $('#searchBar').val();
+  console.log(query);
   criarBotoes(query, c_value=c);
   //search(query); // Chama a função de busca (api)
 });
