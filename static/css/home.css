@@ -2,7 +2,7 @@
   display: block;
   margin: auto;
   width: 18.3vw;
-  height: 11.1vh;
+  height: 15vh;
   position: relative;
   top: -60px;
   margin-bottom: 3rem;
@@ -11,7 +11,7 @@
 
 .logomarca{
   width: 100%;
-  height: 150px;
+  height: 200px;
 }
 
 .logout-button{
