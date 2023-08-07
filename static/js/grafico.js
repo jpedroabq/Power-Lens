@@ -15,6 +15,10 @@ let isMovable = false;
 
 function lockDiv() {
   if (!isMovable) {
+    document.getElementById('lock').style.visibility = "visible";
+    document.getElementById('unlock').style.transition = "0s";
+    document.getElementById('unlock').style.visibility = "hidden";
+    document.getElementById('lock').style.transition = "0.5s";
     // Habilitar a movimenta��o da div usando a biblioteca Draggable (ou qualquer outra de sua prefer�ncia)
     $(".container").draggable({
       containment: "parent",
@@ -22,16 +26,18 @@ function lockDiv() {
     });
     
     isMovable = true;
-    document.getElementById('lock').style.visibility = "visible";
-    document.getElementById('unlock').style.visibility = "hidden";
+    
 
 
   } else {
+    document.getElementById('unlock').style.visibility = "visible";
+    document.getElementById('lock').style.transition = "0s";
+    document.getElementById('lock').style.visibility = "hidden";
+    document.getElementById('unlock').style.transition = "0.5s";
     // Desabilitar a movimenta��o da div
     $(".container").draggable("destroy");
     isMovable = false;
-    document.getElementById('lock').style.visibility = "hidden";
-    document.getElementById('unlock').style.visibility = "visible";
+ 
   }
 }
 
