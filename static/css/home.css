@@ -1,12 +1,11 @@
 .container-logomarca {
   display: block;
-  margin: auto;
-  width: 18.3vw;
-  height: 15vh;
+  width: 6vw;
+  height: 4vh;
   position: relative;
-  top: -60px;
+  top: -70px;
+  left: 12%;
   margin-bottom: 3rem;
-  z-index: -1;
 }
 
 .logomarca{
@@ -21,7 +20,7 @@
   height: 2rem;
   width: 100px;
   left: 90%;
-  top: 30px;
+  top: 10px;
   border-radius: 6px;
   outline: none;
   background-color: transparent;
@@ -90,7 +89,7 @@
 .output-area {
   position: relative;
   width: 100%;
-  top: -80px;
+  top: 15px;
   height: 710px;
 
   display: grid;
@@ -202,6 +201,7 @@
 #clearGraphsBtn {
   font-family: 'Montserrat', sans-serif;
   position: relative;
+  left: 4vw;
   width: 160px;
   height: 40px;
   border: 1.5px solid #135BE7;

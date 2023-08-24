@@ -1,4 +1,4 @@
-//Torna a div do gráfico arrastável e redimensionável
+//Torna a div do grï¿½fico arrastï¿½vel e redimensionï¿½vel
 
 let query = "";
 
@@ -15,23 +15,29 @@ let isMovable = false;
 
 function lockDiv() {
   if (!isMovable) {
-    // Habilitar a movimentação da div usando a biblioteca Draggable (ou qualquer outra de sua preferência)
+    document.getElementById('lock').style.visibility = "visible";
+    document.getElementById('unlock').style.transition = "0s";
+    document.getElementById('unlock').style.visibility = "hidden";
+    document.getElementById('lock').style.transition = "0.5s";
+    // Habilitar a movimentaï¿½ï¿½o da div usando a biblioteca Draggable (ou qualquer outra de sua preferï¿½ncia)
     $(".container").draggable({
       containment: "parent",
       handles: "n, e, s, w, ne, sw, nw"
     });
     
     isMovable = true;
-    document.getElementById('lock').style.visibility = "visible";
-    document.getElementById('unlock').style.visibility = "hidden";
+    
 
 
   } else {
-    // Desabilitar a movimentação da div
+    document.getElementById('unlock').style.visibility = "visible";
+    document.getElementById('lock').style.transition = "0s";
+    document.getElementById('lock').style.visibility = "hidden";
+    document.getElementById('unlock').style.transition = "0.5s";
+    // Desabilitar a movimentaï¿½ï¿½o da div
     $(".container").draggable("destroy");
     isMovable = false;
-    document.getElementById('lock').style.visibility = "hidden";
-    document.getElementById('unlock').style.visibility = "visible";
+ 
   }
 }
 
@@ -40,7 +46,7 @@ const unlockBtn = document.getElementById('unlock');
 unlockBtn.addEventListener('click', lockDiv)
 lockBtn.addEventListener('click', lockDiv)
 
-//Adiciona as divs invisíveis
+//Adiciona as divs invisï¿½veis
 let inputForm = document.getElementById('searchBtn');
 let i = 1;
 inputForm.addEventListener("click", (e) => {
@@ -51,7 +57,7 @@ inputForm.addEventListener("click", (e) => {
   if (input.value ==""){
     alert("Digite algo no campo de busca");
   } else {
-    //torna a div # visível
+    //torna a div # visï¿½vel
     let divName = "container" + i;
     document.getElementById(divName).style.visibility = "visible";
 
@@ -62,7 +68,7 @@ inputForm.addEventListener("click", (e) => {
   }
 });
 
-//Criação do seletor de gráficos
+//CriaÃ§Ã£o do seletor de grï¿½ficos
 c = 1
 
 $(document).ready(function () {
@@ -142,10 +148,8 @@ function criarBotoes(query, c_value) {
   botaoTorta.addEventListener('click', function () {
     search(query, 'bar', save=true, cvalue=c_value);
     removeBtns();
-    moveLock();
   });
 
-  //c++;
 }
 
 // Function to retrieve the CSRF token from cookies
@@ -272,12 +276,10 @@ function search(query, g_type, save = true, cvalue = c, graphData = null) {
   }
 }
 
-//Evento de clique no botão de busca
+//Evento de clique no botÃ£o de busca
 $('#searchBtn').on('click', function () {
-  //query = $('#searchBar').val();
-  console.log(query);
   criarBotoes(query, c_value=c);
-  //search(query); // Chama a função de busca (api)
+  c++; // Incrementa o contador de divs
 });
 
 $('#clearGraphsBtn').on('click', function () {
