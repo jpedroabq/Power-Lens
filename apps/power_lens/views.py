@@ -105,4 +105,4 @@ def clear_graphs(request):
 
     # You can add more session data to remove if needed
 
-    return HttpResponse("Graphs cleared successfully.")
+    return redirect(homePage)
