@@ -85,7 +85,7 @@ $(document).ready(function () {
 
       // Now create the Plotly graph using the retrieved data
       // You can use the search() function here with the retrieved query and g_type
-      search(query, g_type, save = false, cvalue=c_value);
+      search(query, g_type, save = false, cvalue=c_value, graphData=GraphData);
     });
   });
 });
@@ -167,18 +167,17 @@ function getCookie(name) {
 
 
 // Search function
-function search(query, g_type, save = true, cvalue = c) {
-  $.get('http://127.0.0.1:5000/api/sql', { prompt: query }, function (data) {
-    var keys = Object.keys(data[0])
+function search(query, g_type, save = true, cvalue = c, graphData = null) {
+  if (graphData != null) {
     // trace
     var trace1 = {
       type: g_type,  // set the chart type
-      x: data.map(function (item) { return item[keys[0]]; }),  // x-axis values
-      y: data.map(function (item) { return item[keys[keys.length - 1]]; }),  // y-axis values
+      x: graphData[0]['x'],  // x-axis values
+      y: graphData[0]['y'],  // y-axis values
     };
 
     var layout = {
-      title: 'Quantidade de vendas por cliente',  // chart title
+      title: query,  // chart title
       xaxis: {
         title: 'X axis',  // x-axis label
       },
@@ -206,31 +205,71 @@ function search(query, g_type, save = true, cvalue = c) {
       }
     });
     c++;
+  } else {
+    $.get('http://127.0.0.1:5000/api/sql', { prompt: query }, function (data) {
+      var keys = Object.keys(data[0])
+      // trace
+      var trace1 = {
+        type: g_type,  // set the chart type
+        x: data.map(function (item) { return item[keys[0]]; }),  // x-axis values
+        y: data.map(function (item) { return item[keys[keys.length - 1]]; }),  // y-axis values
+      };
 
-    if (save == true) {
-      const graphJson = JSON.stringify(data);
-      const csrftoken = getCookie('csrftoken'); // Function to get the CSRF token (see below)
-      
-      $.ajax({
-        type: 'POST',
-        url: 'power_lens/save_graph/', // URL to the Django view that handles saving the graph
-        data: {
-          'graph_data': graphJson,
-          'query': query,
-          'g_type': g_type,
-          // Add any other data you need to save related to the graph
-          'c_value': cvalue,
-          'csrfmiddlewaretoken': csrftoken, // Include the CSRF token in the request
+      var layout = {
+        title: 'Quantidade de vendas por cliente',  // chart title
+        xaxis: {
+          title: 'X axis',  // x-axis label
         },
-        success: function (response) {
-          console.log('Graph saved to session.');
-        },
-        error: function (error) {
-          console.error('Error saving graph to session:', error);
+        yaxis: {
+          title: 'Y axis',  // y-axis label
+        }
+      };
+
+      var data = [trace1];
+
+      var config = {
+        responsive: true,
+        editable: true, // Allow the graph to be dragged and resized
+      };
+
+      // control variable for div
+      Plotly.newPlot('container'+cvalue, data, layout, config);
+
+      $('#container'+cvalue).resizable({
+        resize: function (event, ui) {
+          Plotly.relayout('container'+cvalue, {
+            width: ui.size.width,
+            height: ui.size.height
+          });
         }
       });
-    }
-  });
+      c++;
+
+      if (save == true) {
+        const graphJson = JSON.stringify(data);
+        const csrftoken = getCookie('csrftoken'); // Function to get the CSRF token (see below)
+        
+        $.ajax({
+          type: 'POST',
+          url: 'power_lens/save_graph/', // URL to the Django view that handles saving the graph
+          data: {
+            'graph_data': graphJson,
+            'query': query,
+            'g_type': g_type,
+            // Add any other data you need to save related to the graph
+            'c_value': cvalue,
+            'csrfmiddlewaretoken': csrftoken, // Include the CSRF token in the request
+          },
+          success: function (response) {
+            console.log('Graph saved to session.');
+          },
+          error: function (error) {
+            console.error('Error saving graph to session:', error);
+          }
+        });
+      }
+    });
+  }
 }
 
 //Evento de clique no botão de busca
