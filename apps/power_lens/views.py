@@ -81,20 +81,6 @@ def save_graph_to_session(request):
     return JsonResponse({'error': 'Invalid request method.'})
 
 def retrieve_graph_from_session(request):
-    # graph_data = request.session.get('graph_data')
-    # query = request.session.get('query')
-    # g_type = request.session.get('g_type')
-    # c_value = request.session.get('c_value')
-
-    # if graph_data and g_type:
-    #     return JsonResponse({
-    #         'graph_data': graph_data,
-    #         'query': query,
-    #         'c_value': c_value,
-    #         'g_type': g_type
-    #     })
-    # else:
-    #     return JsonResponse({'error': 'No graph data found in the session.'})
     graphs_list = request.session.get('graphs_list', [])
     return JsonResponse({'graphs_list': graphs_list})
     
