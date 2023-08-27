@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-b!mdvsb1o)zhhbz(9!6ch*@lmxp3qhuy3dtl(s83w$(a@y7ebm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['34.95.255.129']
 
 
 # Application definition
@@ -78,10 +78,21 @@ WSGI_APPLICATION = 'power_lens.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresqL_psycopg2',
+        'NAME': 'lensaidb',
+        'USER': 'jfeli',
+        'PASSWORD': 'Nap@1814!',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -122,6 +133,7 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
