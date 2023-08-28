@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-b!mdvsb1o)zhhbz(9!6ch*@lmxp3qhuy3dtl(s83w$(a@y7ebm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['34.95.255.129']
+ALLOWED_HOSTS = ['34.95.255.129',
+                 'www.lensai.com.br',
+                 'lensai.com.br',]
 
 
 # Application definition
