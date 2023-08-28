@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'power_lens.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresqL_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'lensaidb',
         'USER': 'jfeli',
         'PASSWORD': 'Nap@1814!',
