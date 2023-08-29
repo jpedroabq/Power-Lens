@@ -9,7 +9,7 @@ from django.contrib.auth import get_user_model
 
 @login_required(login_url='/auth/login/')
 def homePage(request):
-    return render(request, 'templates/home.html', {'user': request.user})
+    return render(request, 'templates/home.html', {'api_tunnel': request.user.api_tunnel})
 
 def cadastro(request):
     if request.method == "GET":
