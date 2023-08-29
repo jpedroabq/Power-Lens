@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.power_lens',
     'corsheaders',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -98,7 +99,7 @@ DATABASES = {
     }
 }
 
-
+AUTH_USER_MODEL = "users.CustomUser"
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
