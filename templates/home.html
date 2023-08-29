@@ -62,6 +62,7 @@
         <div id ="container5" class="container"></div>
         <div id ="container6" class="container"></div>
     </div>
-    <script src="{% static 'js/grafico.js' %}" data-apitunnel="{{api_tunnel}}"></script>   
+    <script src="{% static 'js/grafico.js' %}" defer></script>
+    {{ api_tunnel|json_script }}  
 </body>
 </html>

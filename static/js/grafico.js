@@ -210,8 +210,7 @@ function search(query, g_type, save = true, cvalue = c, graphData = null) {
     });
     c++;
   } else {
-    const data = document.currentScript.dataset;
-    const api_tunnel_url = data.apitunnel;
+    const api_tunnel_url = JSON.parse(document.currentScript.nextElementSibling.textContent).textContent;
     $.get(api_tunnel_url + '/api/sql', { prompt: query }, function (data) {
       var keys = Object.keys(data[0])
       // trace
