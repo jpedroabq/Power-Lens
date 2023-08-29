@@ -19,13 +19,14 @@ def cadastro(request):
         username = request.POST.get('username')
         email = request.POST.get('email')
         senha = request.POST.get('senha')
+        api_tunnel = request.POST.get('api_tunnel')
 
         user = User.objects.filter(username=username).exists()
 
         if user:
             return HttpResponse("Usuário já existe")
         
-        user = User.objects.create_user(username=username, email=email, password=senha)
+        user = User.objects.create_user(username=username, email=email, password=senha, api_tunnel=api_tunnel)
 
         return redirect(login)
     
