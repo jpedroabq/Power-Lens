@@ -1,12 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_django
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as logout_django
 from django.shortcuts import redirect
-
+from django.contrib.auth import get_user_model
 
 @login_required(login_url='/auth/login/')
 def homePage(request):
@@ -21,6 +20,7 @@ def cadastro(request):
         senha = request.POST.get('senha')
         api_tunnel = request.POST.get('api_tunnel')
 
+        User = get_user_model()
         user = User.objects.filter(username=username).exists()
 
         if user:
