@@ -63,6 +63,6 @@
         <div id ="container6" class="container"></div>
     </div>
     <script src="{% static 'js/grafico.js' %}" defer></script>
-    {{ api_tunnel|json_script }}  
+    <script type="application/json" id="api_tunnel_url"> {{api_tunnel}} </script>
 </body>
 </html>
