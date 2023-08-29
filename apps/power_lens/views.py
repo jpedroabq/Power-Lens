@@ -15,7 +15,7 @@ def cadastro(request):
     if request.method == "GET":
         return render(request, 'templates/cadastro.html')
     else:
-        username = request.POST.get('username')
+        #username = request.POST.get('username')
         email = request.POST.get('email')
         senha = request.POST.get('senha')
         api_tunnel = request.POST.get('api_tunnel')
@@ -26,7 +26,7 @@ def cadastro(request):
         if user:
             return HttpResponse("Usuário já existe")
         
-        user = User.objects.create_user(username=username, email=email, password=senha, api_tunnel=api_tunnel)
+        user = User.objects.create_user(email=email, password=senha, api_tunnel=api_tunnel)
 
         return redirect(login)
     
