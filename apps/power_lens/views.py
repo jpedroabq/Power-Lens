@@ -21,7 +21,7 @@ def cadastro(request):
         api_tunnel = request.POST.get('api_tunnel')
 
         User = get_user_model()
-        user = User.objects.filter(username=username).exists()
+        user = User.objects.filter(email=email).exists()
 
         if user:
             return HttpResponse("Usuário já existe")
