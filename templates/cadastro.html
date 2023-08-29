@@ -23,13 +23,16 @@
     <div class="container-cadastro">
         <form action="{% url 'cadastro' %}" method="POST" autocomplete="off">{% csrf_token %}
             <h1>Criar conta</h1>
-            <input type="text" placeholder="Nome de usuÃ¡rio" name="username" class="input-username">
+            <input type="text" placeholder="Nome de usuário" name="username" class="input-username">
             <br>
             <br>
             <input type="email" placeholder="E-mail" name="email" class="input-email">
             <br>
             <br>
             <input type="password" placeholder="Senha" name="senha" class="input-senha">
+            <br>
+            <br>
+            <input type="text" placeholder="Túnel da API" name="api_tunnel" class="input-username">
             <br>
             <br>
             <div class="container-button">
@@ -40,7 +43,7 @@
         </form>
         <form action="{% url 'login' %}" method="GET">
             <div class="login-button-container">
-                <button class="redirect-button">JÃ¡ tem uma conta? Entre aqui.</button>
+                <button class="redirect-button">Já tem uma conta? Entre aqui.</button>
             </div>
     </form>
     </div>
