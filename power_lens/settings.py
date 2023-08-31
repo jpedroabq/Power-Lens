@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['34.95.255.129',
                  'www.lensai.com.br',
-                 'lensai.com.br',]
+                 'lensai.com.br', '127.0.0.1']
 
 
 # Application definition
@@ -122,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 
