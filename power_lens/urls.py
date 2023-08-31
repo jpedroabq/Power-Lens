@@ -16,11 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include  
-from apps.power_lens.views import homePage
+from apps.power_lens.views import homePage, landingPage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', homePage),
+    path('', landingPage),
+    path('home/', homePage),
     path('auth/', include('apps.power_lens.urls')),
     path('power_lens/', include('apps.power_lens.urls')),
 ]

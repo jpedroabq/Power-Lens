@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate
@@ -10,6 +11,9 @@ from django.contrib.auth import get_user_model
 @login_required(login_url='/auth/login/')
 def homePage(request):
     return render(request, 'templates/home.html', {'api_tunnel': request.user.api_tunnel})
+
+def landingPage(request):
+    return render(request, 'templates/index.html')
 
 def cadastro(request):
     if request.method == "GET":
