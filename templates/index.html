@@ -1,0 +1,75 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LensAI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+
+</head>
+<body>
+    <nav>
+        <h1>Lens<span style="color: #135BE7;">AI</span></h1>
+        <ul class="nav-items">
+            <li><button class="loginBtn"><strong>Entrar</strong></button></li>
+        </ul>
+    </nav>
+    <div class="intro">
+        <div class="textContainer">
+            <br>
+            <h2>Lens<span style="color: #135BE7;">AI</span>: avalie seu negócio através de </h2>
+            <h2>pesquisas escritas e gráficos automáticos</h2>
+            <br>
+            <p>Pergunte  o que quiser sobre sua empresa e tenha gráficos</p>
+            <p>automáticos, nós cuidamos do resto!</p>
+            <br>
+            <p><strong>Digite seu e-mail para mais informações</strong></p>
+            <form>
+                <input type="email" name="email" placeholder="email@email.com">
+                <button type="submit"><strong>Quero mais informações</strong></button>
+            </form>
+        </div>
+        <div class="imgContainer">
+            <img class="background" src="{% static 'media/background.png' %}" alt="">
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="subhead">
+        <h2 id="subhead1">Descubra o poder da pesquisa em </h2>
+        <h2 id="subhead2">linguagem natural!</h2>
+    </div>
+    <br>
+    <br>
+    <div class="demo">
+        <h2><span style="color: #135BE7;">01. </span> Barra de pesquisa intuitiva</h2>
+        <p>Faça pesquisas usando linguagem natural, a Inteligência Artificial faz o resto.</p>
+        <br>
+        <br>
+        <img id ="demo01gif" src="{% static 'media/pesquisa.gif'%}" alt="">
+        <br>
+        <br>
+        <h2><span style="color: #135BE7;">02. </span> Um resultado, várias visualizações</h2>
+        <p>Escolha a melhor maneira para visualizar seus resultados.</p>
+        <br>
+        <br>
+        <img id="demo02gif" src="{% static 'media/pesquisa2.gif'%}" alt="">
+        <br>
+        <br>
+        <h2><span style="color: #135BE7;">03. </span> Resultados personalizáveis</h2>
+        <p>Dê zoom, filtre um intervalo. Você no comando dos seus dados.</p>
+        <br>
+        <br>
+        <img id="demo03gif" src="{% static 'media/pesquisa3.gif'%}" alt="">
+        <br>
+        <br>
+    </div>
+</body>
+</html>
