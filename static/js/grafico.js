@@ -1,4 +1,4 @@
-//Torna a div do gr�fico arrast�vel e redimension�vel
+//Torna a div do grafico arrastavel e redimensionavel
 
 let query = "";
 
@@ -19,7 +19,7 @@ function lockDiv() {
     document.getElementById('unlock').style.transition = "0s";
     document.getElementById('unlock').style.visibility = "hidden";
     document.getElementById('lock').style.transition = "0.5s";
-    // Habilitar a movimenta��o da div usando a biblioteca Draggable (ou qualquer outra de sua prefer�ncia)
+    // Habilitar a movimentacao da div usando a biblioteca Draggable (ou qualquer outra de sua preferencia)
     $(".container").draggable({
       containment: "parent",
       handles: "n, e, s, w, ne, sw, nw"
@@ -34,7 +34,7 @@ function lockDiv() {
     document.getElementById('lock').style.transition = "0s";
     document.getElementById('lock').style.visibility = "hidden";
     document.getElementById('unlock').style.transition = "0.5s";
-    // Desabilitar a movimenta��o da div
+    // Desabilitar a movimentacao da div
     $(".container").draggable("destroy");
     isMovable = false;
  
@@ -46,7 +46,7 @@ const unlockBtn = document.getElementById('unlock');
 unlockBtn.addEventListener('click', lockDiv)
 lockBtn.addEventListener('click', lockDiv)
 
-//Adiciona as divs invis�veis
+//Adiciona as divs invisiveis
 let inputForm = document.getElementById('searchBtn');
 let i = 1;
 inputForm.addEventListener("click", (e) => {
@@ -57,7 +57,7 @@ inputForm.addEventListener("click", (e) => {
   if (input.value ==""){
     alert("Digite algo no campo de busca");
   } else {
-    //torna a div # vis�vel
+    //torna a div # visï¿½vel
     let divName = "container" + i;
     document.getElementById(divName).style.visibility = "visible";
 
@@ -68,7 +68,7 @@ inputForm.addEventListener("click", (e) => {
   }
 });
 
-//Criação do seletor de gr�ficos
+//Criação do seletor de graficos
 c = 1
 
 $(document).ready(function () {
@@ -277,7 +277,7 @@ function search(query, g_type, save = true, cvalue = c, graphData = null) {
   }
 }
 
-//Evento de clique no botão de busca
+//Evento de clique no botÃ£o de busca
 $('#searchBtn').on('click', function () {
   criarBotoes(query, c_value=c);
   c++; // Incrementa o contador de divs
