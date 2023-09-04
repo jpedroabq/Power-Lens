@@ -211,17 +211,35 @@ function search(query, g_type, save = true, cvalue = c, graphData = null) {
     c++;
   } else {
     const api_tunnel_url = document.getElementById('api_tunnel_url').textContent;
-    var api_url = strip(api_tunnel_url) + '/api/sql';
-    $.get(api_url, { prompt: query }, function (data) {
-      var keys = Object.keys(data[0])
-      // trace
-      var trace1 = {
-        type: g_type,  // set the chart type
-        x: data.map(function (item) { return item[keys[0]]; }),  // x-axis values
-        y: data.map(function (item) { return item[keys[keys.length - 1]]; }),  // y-axis values
-      };
+    console.log(api_tunnel_url);
+    var api_url = "https://"+ api_tunnel_url.trim() + '/api/sql?prompt=' + query;
 
-      var layout = {
+    const getGraphData = async () => {
+      const response = await fetch(api_url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        mode: 'no-cors',
+      });
+    
+      if (response.status === 200) {
+        return await response.json();
+      } else {
+        throw new Error(`Request failed with status code ${response.status}`);
+      }
+    };
+
+    const renderGraph = (graphData) => {
+      // Create the trace
+      const trace1 = {
+        type: g_type,  // set the chart type
+        x: graphData.map(function (item) { return item[keys[0]]; }),  // x-axis values
+        y: graphData.map(function (item) { return item[keys[keys.length - 1]]; }),  // y-axis values
+      };
+    
+      // Create the layout
+      const layout = {
         title: 'Quantidade de vendas por cliente',  // chart title
         xaxis: {
           title: 'X axis',  // x-axis label
@@ -230,17 +248,19 @@ function search(query, g_type, save = true, cvalue = c, graphData = null) {
           title: 'Y axis',  // y-axis label
         }
       };
-
-      var data = [trace1];
-
-      var config = {
+    
+      // Create the data array
+      const data = [trace1];
+    
+      // Create the config object
+      const config = {
         responsive: true,
         editable: true, // Allow the graph to be dragged and resized
       };
-
-      // control variable for div
+    
+      // Render the graph
       Plotly.newPlot('container'+cvalue, data, layout, config);
-
+    
       $('#container'+cvalue).resizable({
         resize: function (event, ui) {
           Plotly.relayout('container'+cvalue, {
@@ -249,32 +269,106 @@ function search(query, g_type, save = true, cvalue = c, graphData = null) {
           });
         }
       });
-      c++;
+    };
 
-      if (save == true) {
-        const graphJson = JSON.stringify(data);
-        const csrftoken = getCookie('csrftoken'); // Function to get the CSRF token (see below)
-        
-        $.ajax({
-          type: 'POST',
-          url: 'power_lens/save_graph/', // URL to the Django view that handles saving the graph
-          data: {
-            'graph_data': graphJson,
-            'query': query,
-            'g_type': g_type,
-            // Add any other data you need to save related to the graph
-            'c_value': cvalue,
-            'csrfmiddlewaretoken': csrftoken, // Include the CSRF token in the request
-          },
-          success: function (response) {
-            console.log('Graph saved to session.');
-          },
-          error: function (error) {
-            console.error('Error saving graph to session:', error);
-          }
-        });
+    const saveGraph = async (graphData) => {
+      const csrftoken = getCookie('csrftoken'); // Function to get the CSRF token (see below)
+    
+      const response = await fetch('power_lens/save_graph/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify({
+          graph_data: graphData,
+          query,
+          g_type,
+          // Add any other data you need to save related to the graph
+          c_value,
+        }),
+      });
+    
+      if (response.status === 200) {
+        console.log('Graph saved to session.');
+      } else {
+        console.error('Error saving graph to session:', response);
       }
-    });
+    };
+
+    const main = async () => {
+      const data = await getGraphData();
+      renderGraph(data);
+    
+      if (save === true) {
+        await saveGraph(data);
+      }
+    };
+
+    main();
+    // $.get(api_url, { prompt: query }, function (data) {
+    //   var keys = Object.keys(data[0])
+    //   // trace
+    //   var trace1 = {
+    //     type: g_type,  // set the chart type
+    //     x: data.map(function (item) { return item[keys[0]]; }),  // x-axis values
+    //     y: data.map(function (item) { return item[keys[keys.length - 1]]; }),  // y-axis values
+    //   };
+
+    //   var layout = {
+    //     title: 'Quantidade de vendas por cliente',  // chart title
+    //     xaxis: {
+    //       title: 'X axis',  // x-axis label
+    //     },
+    //     yaxis: {
+    //       title: 'Y axis',  // y-axis label
+    //     }
+    //   };
+
+    //   var data = [trace1];
+
+    //   var config = {
+    //     responsive: true,
+    //     editable: true, // Allow the graph to be dragged and resized
+    //   };
+
+    //   // control variable for div
+    //   Plotly.newPlot('container'+cvalue, data, layout, config);
+
+    //   $('#container'+cvalue).resizable({
+    //     resize: function (event, ui) {
+    //       Plotly.relayout('container'+cvalue, {
+    //         width: ui.size.width,
+    //         height: ui.size.height
+    //       });
+    //     }
+    //   });
+    //   c++;
+
+    //   if (save == true) {
+    //     const graphJson = JSON.stringify(data);
+    //     const csrftoken = getCookie('csrftoken'); // Function to get the CSRF token (see below)
+        
+    //     $.ajax({
+    //       type: 'POST',
+    //       url: 'power_lens/save_graph/', // URL to the Django view that handles saving the graph
+    //       data: {
+    //         'graph_data': graphJson,
+    //         'query': query,
+    //         'g_type': g_type,
+    //         // Add any other data you need to save related to the graph
+    //         'c_value': cvalue,
+    //         'csrfmiddlewaretoken': csrftoken, // Include the CSRF token in the request
+    //       },
+    //       success: function (response) {
+    //         console.log('Graph saved to session.');
+    //       },
+    //       error: function (error) {
+    //         console.error('Error saving graph to session:', error);
+    //       }
+    //     });
+    //   }
+    // });
   }
 }
 

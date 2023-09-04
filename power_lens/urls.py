@@ -24,4 +24,5 @@ urlpatterns = [
     path('home/', homePage),
     path('auth/', include('apps.power_lens.urls')),
     path('power_lens/', include('apps.power_lens.urls')),
+    path('home/power_lens/', include('apps.power_lens.urls')),
 ]
