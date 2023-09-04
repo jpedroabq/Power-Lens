@@ -227,6 +227,7 @@ function search(query, g_type, save = true, cvalue = c, graphData = null) {
       if (response.status === 200) {
         return await response.json();
       } else {
+        console.log(response); //logging for test purposes
         throw new Error(`Request failed with status code ${response.status}`);
       }
     };
