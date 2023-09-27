@@ -215,20 +215,24 @@ function search(query, g_type, save = true, cvalue = c, graphData = null) {
     var api_url = "https://"+ api_tunnel_url.trim() + '/api/sql?prompt=' + query;
 
     const getGraphData = async () => {
-      const response = await fetch(api_url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'ngrok-skip-browser-warning': true,
-        },
-        mode: 'no-cors',
-      });
-    
-      if (response.status === 200) {
-        return await response.json();
-      } else {
-        console.log(response); //logging for test purposes
-        throw new Error(`Request failed with status code ${response.status}`);
+      try {
+        const response = await fetch(api_url, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': true,
+          },
+          //mode: 'no-cors',
+        });
+      
+        if (response.status == 200) {
+          return await response.json();
+        } else {
+          //console.log(response); //logging for test purposes
+          throw new Error(`Request failed with status code ${response.status}`);
+        }
+      } catch (error) {
+        console.error(error);
       }
     };
 
