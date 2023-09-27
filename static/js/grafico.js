@@ -221,8 +221,7 @@ function search(query, g_type, save = true, cvalue = c, graphData = null) {
           headers: {
             'Content-Type': 'application/json',
             'ngrok-skip-browser-warning': true,
-          },
-          mode: 'no-cors',
+          }
         });
       
         if (response.status == 200) {
